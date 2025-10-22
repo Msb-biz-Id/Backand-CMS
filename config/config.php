@@ -46,7 +46,7 @@ return [
     'security' => [
         'csrf_token_name' => 'csrf_token',
         'csrf_token_expire' => 3600, // 1 hour
-        'password_hash_algo' => PASSWORD_ARGON2ID, // Best practice: Argon2id
+        'password_hash_algo' => PASSWORD_DEFAULT, // Compatible dengan PHP 7.4+ (bcrypt/argon2)
         'password_min_length' => 8,
         'max_login_attempts' => 5,
         'login_lockout_time' => 900, // 15 minutes
