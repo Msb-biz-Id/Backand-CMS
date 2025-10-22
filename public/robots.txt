@@ -1,0 +1,35 @@
+# robots.txt for Advanced CMS
+# This file is managed by the CMS and can be edited via admin panel
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /storage/
+Disallow: /database/
+Disallow: /config/
+Disallow: /app/
+Disallow: /*.php$
+
+# Sitemap
+Sitemap: https://your-domain.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 10
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

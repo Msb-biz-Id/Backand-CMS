@@ -1,0 +1,32 @@
+{
+    "name": "Default Theme",
+    "version": "1.0.0",
+    "author": "Advanced CMS",
+    "description": "Modern, responsive default theme for Advanced CMS",
+    "screenshot": "screenshot.png",
+    "supports": {
+        "widgets": true,
+        "menus": true,
+        "custom_header": true,
+        "custom_background": true,
+        "post_thumbnails": true
+    },
+    "customization": {
+        "colors": {
+            "primary": "#007bff",
+            "secondary": "#6c757d",
+            "success": "#28a745",
+            "danger": "#dc3545",
+            "warning": "#ffc107",
+            "info": "#17a2b8"
+        },
+        "fonts": {
+            "heading": "Poppins, sans-serif",
+            "body": "Inter, sans-serif"
+        },
+        "layout": {
+            "container_width": "1200px",
+            "sidebar_width": "300px"
+        }
+    }
+}
