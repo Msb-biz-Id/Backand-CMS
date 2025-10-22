@@ -25,10 +25,23 @@ Router::get('/tag/{slug}', 'PostController@tag');
 // Comments
 Router::post('/comments/submit', 'CommentController@submit', ['csrf']);
 
-// Products
+// Products (E-Commerce)
 Router::get('/products', 'ProductController@index');
 Router::get('/product/{slug}', 'ProductController@show');
 Router::get('/products/category/{slug}', 'ProductController@category');
+Router::get('/products/brand/{slug}', 'ProductController@brand');
+
+// Shopping Cart
+Router::get('/cart', 'CartController@index');
+Router::post('/api/cart/add', 'CartController@add');
+Router::post('/api/cart/update/{id}', 'CartController@update');
+Router::post('/api/cart/remove/{id}', 'CartController@remove');
+Router::get('/api/cart/count', 'CartController@count');
+
+// Checkout
+Router::get('/checkout', 'CheckoutController@index', ['csrf']);
+Router::post('/checkout/process', 'CheckoutController@process', ['csrf']);
+Router::get('/checkout/success/{orderId}', 'CheckoutController@success');
 
 // Jobs/Loker
 Router::get('/jobs', 'JobController@index');
@@ -173,3 +186,13 @@ Router::post("/{$adminPath}/tools/cache/clear", 'Admin\ToolController@clearCache
 
 // Admin - Analytics
 Router::get("/{$adminPath}/analytics", 'Admin\AnalyticsController@index', ['auth']);
+
+// Admin - AI Generator
+Router::get("/{$adminPath}/ai/generator", 'Admin\AIGeneratorController@index', ['auth']);
+Router::post("/{$adminPath}/ai/generate", 'Admin\AIGeneratorController@generate', ['auth', 'csrf']);
+Router::post("/{$adminPath}/ai/save", 'Admin\AIGeneratorController@saveAsPost', ['auth', 'csrf']);
+
+// Admin - Themes
+Router::get("/{$adminPath}/themes", 'Admin\ThemeController@index', ['auth', 'admin']);
+Router::post("/{$adminPath}/themes/activate", 'Admin\ThemeController@activate', ['auth', 'admin', 'csrf']);
+Router::post("/{$adminPath}/themes/customize", 'Admin\ThemeController@customize', ['auth', 'admin', 'csrf']);

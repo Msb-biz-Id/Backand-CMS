@@ -1,122 +1,125 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <!-- SEO Meta Tags -->
-    <?php echo $this->seo->render(); ?>
+    <?php echo $seoData['meta_tags'] ?? ''; ?>
     
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="/themes/default/assets/css/theme.css">
     
-    <!-- Bootstrap CSS -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Icons -->
-    <link href="/assets/css/icons.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <style>
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 100px 0;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-        }
-        .feature-box {
-            padding: 30px;
-            border-radius: 10px;
-            background: #f8f9fa;
-            margin-bottom: 30px;
-            transition: transform 0.3s;
-        }
-        .feature-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Remix Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+    
+    <?php if (isset($extraCss)): ?>
+        <?php foreach ($extraCss as $css): ?>
+            <link rel="stylesheet" href="<?php echo $css; ?>">
+        <?php endforeach; ?>
+    <?php endif; ?>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <div class="container">
-        <a class="navbar-brand" href="/">
-            <strong>Advanced CMS</strong>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/posts">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/products">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/jobs">Careers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-primary text-white ms-2" href="/admin">Admin Panel</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- Page Content -->
-<?php include $viewPath; ?>
-
-<!-- Footer -->
-<footer class="bg-dark text-white py-5 mt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <h5>Advanced CMS</h5>
-                <p>Modern content management system dengan fitur SEO canggih dan keamanan tingkat tinggi.</p>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="site-logo">
+                <a href="/">Advanced CMS</a>
             </div>
-            <div class="col-md-4">
-                <h5>Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="/" class="text-white-50">Home</a></li>
-                    <li><a href="/posts" class="text-white-50">Blog</a></li>
-                    <li><a href="/products" class="text-white-50">Products</a></li>
-                    <li><a href="/admin" class="text-white-50">Admin</a></li>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/posts">Blog</a></li>
+                    <li><a href="/products">Products</a></li>
+                    <li><a href="/page/about">About</a></li>
+                    <li><a href="/page/contact">Contact</a></li>
+                    <li>
+                        <a href="/cart" class="cart-icon">
+                            <i class="ri-shopping-cart-line"></i>
+                            <span class="cart-badge">0</span>
+                        </a>
+                    </li>
                 </ul>
-            </div>
-            <div class="col-md-4">
-                <h5>Connect</h5>
-                <div class="social-links">
-                    <a href="#" class="text-white-50 me-3"><i class="ri-facebook-fill"></i></a>
-                    <a href="#" class="text-white-50 me-3"><i class="ri-twitter-fill"></i></a>
-                    <a href="#" class="text-white-50 me-3"><i class="ri-instagram-fill"></i></a>
-                    <a href="#" class="text-white-50"><i class="ri-linkedin-fill"></i></a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    <?php if (isset($_SESSION['flash'])): ?>
+        <div class="container mt-3">
+            <?php foreach ($_SESSION['flash'] as $type => $message): ?>
+                <div class="alert alert-<?php echo $type; ?>" role="alert">
+                    <?php echo $message; ?>
+                </div>
+                <?php unset($_SESSION['flash'][$type]); ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+    <!-- Main Content -->
+    <main class="site-main">
+        <?php 
+        $viewPath = __DIR__ . '/../' . $view . '.php';
+        if (file_exists($viewPath)) {
+            include $viewPath;
+        }
+        ?>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-widget">
+                        <h4>About Us</h4>
+                        <p>Advanced CMS - Modern content management system with powerful features.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="footer-widget">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/posts">Blog</a></li>
+                            <li><a href="/products">Products</a></li>
+                            <li><a href="/page/about">About</a></li>
+                            <li><a href="/page/contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="footer-widget">
+                        <h4>Contact Info</h4>
+                        <ul>
+                            <li><i class="ri-mail-line"></i> info@example.com</li>
+                            <li><i class="ri-phone-line"></i> +62 812-3456-7890</li>
+                            <li><i class="ri-map-pin-line"></i> Jakarta, Indonesia</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <?php echo date('Y'); ?> Advanced CMS. All rights reserved. Built with ❤️ + 🤖 AI</p>
+            </div>
         </div>
-        <hr class="bg-white-50 my-4">
-        <div class="text-center">
-            <p class="mb-0">© <?php echo date('Y'); ?> Advanced CMS. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
+    </footer>
 
-<!-- Scripts -->
-<script src="/assets/libs/jquery/jquery.min.js"></script>
-<script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <!-- Theme JS -->
+    <script src="/themes/default/assets/js/theme.js"></script>
+    
+    <?php if (isset($extraJs)): ?>
+        <?php foreach ($extraJs as $js): ?>
+            <script src="<?php echo $js; ?>"></script>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    
+    <?php echo $seoData['schema_markup'] ?? ''; ?>
 </body>
 </html>

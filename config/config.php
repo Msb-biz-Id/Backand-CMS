@@ -199,6 +199,31 @@ return [
         'lazy_load' => true,
     ],
 
+    // Shipping Configuration (Raja Ongkir)
+    'shipping' => [
+        'rajaongkir_api_key' => getenv('RAJAONGKIR_API_KEY') ?: '',
+        'default_origin_city' => '153', // Jakarta
+        'available_couriers' => ['jne', 'pos', 'tiki'],
+    ],
+
+    // AI Configuration (Google Gemini)
+    'ai' => [
+        'gemini_api_key' => getenv('GEMINI_API_KEY') ?: '',
+        'auto_generate_enabled' => false,
+        'default_style' => 'professional',
+        'default_length' => 'medium',
+    ],
+
+    // E-Commerce Configuration
+    'ecommerce' => [
+        'whatsapp_number' => getenv('WHATSAPP_NUMBER') ?: '',
+        'currency_symbol' => 'Rp',
+        'currency_code' => 'IDR',
+        'enable_cod' => true,
+        'minimum_order' => 50000,
+        'tax_rate' => 0, // 0 = no tax
+    ],
+
     // Performance Configuration
     'performance' => [
         'minify_html' => true,
