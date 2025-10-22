@@ -12,17 +12,19 @@ Router::middleware('csrf', 'CSRFMiddleware');
 
 // Frontend Routes
 Router::get('/', 'HomeController@index');
-Router::get('/about', 'PageController@show');
+
+// Pages (Static)
+Router::get('/page/{slug}', 'PageController@show');
 Router::get('/contact', 'PageController@contact');
 Router::post('/contact', 'PageController@sendContact', ['csrf']);
 
-// Blog/Posts
+// Blog/Posts (Dynamic)
 Router::get('/posts', 'PostController@index');
 Router::get('/post/{slug}', 'PostController@show');
 Router::get('/category/{slug}', 'PostController@category');
 Router::get('/tag/{slug}', 'PostController@tag');
 
-// Comments
+// Comments (Dynamic)
 Router::post('/comments/submit', 'CommentController@submit', ['csrf']);
 
 // Products (E-Commerce)

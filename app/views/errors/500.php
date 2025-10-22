@@ -1,44 +1,60 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>500 - Internal Server Error | Advanced CMS</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/assets/images/favicon.ico">
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <title>500 - Internal Server Error</title>
+    <link rel="stylesheet" href="/themes/default/assets/css/theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .error-container {
+            text-align: center;
+            color: #fff;
+            padding: 2rem;
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .error-message {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .btn-home {
+            background: #fff;
+            color: #f5576c;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            color: #f5576c;
+        }
+    </style>
 </head>
-
 <body>
-    <div class="authentication-bg min-vh-100">
-        <div class="bg-overlay bg-white"></div>
-        <div class="container">
-            <div class="d-flex flex-column min-vh-100 px-3 pt-4">
-                <div class="row justify-content-center my-auto">
-                    <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="text-center py-5">
-                            <div class="mb-4 mb-md-5">
-                                <a href="/" class="d-block auth-logo">
-                                    <img src="/assets/images/logo-dark.png" alt="" height="22" class="auth-logo-dark">
-                                    <img src="/assets/images/logo-light.png" alt="" height="22" class="auth-logo-light">
-                                </a>
-                            </div>
-                            <div>
-                                <div class="mb-4">
-                                    <i class="ri-close-circle-line text-danger display-1"></i>
-                                </div>
-                                <h4 class="text-uppercase mt-4">Internal Server Error</h4>
-                                <p class="text-muted">Something went wrong. Please try again later.</p>
-                                <div class="mt-4">
-                                    <a class="btn btn-primary waves-effect waves-light" href="/">Back to Home</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="error-container">
+        <div class="error-code">500</div>
+        <h1 class="error-message">Internal Server Error</h1>
+        <p class="mb-4">Something went wrong on our end. We're working to fix it!</p>
+        <a href="/" class="btn-home">
+            <i class="ri-home-line me-2"></i> Back to Home
+        </a>
     </div>
 </body>
 </html>

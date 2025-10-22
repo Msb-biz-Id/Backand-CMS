@@ -28,16 +28,60 @@
     <header class="site-header">
         <div class="container">
             <div class="site-logo">
-                <a href="/">Advanced CMS</a>
+                <a href="/">
+                    <?php 
+                    // Get site name from settings (dynamic)
+                    $settingModel = new Setting();
+                    $siteName = $settingModel->get('site_name', 'general') ?? 'Advanced CMS';
+                    echo htmlspecialchars($siteName);
+                    ?>
+                </a>
             </div>
             
             <nav class="main-nav">
+                <?php
+                // Get primary menu (dynamic like WordPress)
+                $menuModel = new Menu();
+                $primaryMenu = $menuModel->getMenuWithItems('primary');
+                ?>
+                
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/posts">Blog</a></li>
-                    <li><a href="/products">Products</a></li>
-                    <li><a href="/page/about">About</a></li>
-                    <li><a href="/page/contact">Contact</a></li>
+                    <?php if (!empty($primaryMenu['items'])): ?>
+                        <?php foreach ($primaryMenu['items'] as $item): ?>
+                            <li>
+                                <a href="<?php echo htmlspecialchars($item['url']); ?>" 
+                                   <?php echo $item['target'] ? 'target="' . htmlspecialchars($item['target']) . '"' : ''; ?>
+                                   <?php echo $item['css_class'] ? 'class="' . htmlspecialchars($item['css_class']) . '"' : ''; ?>>
+                                    <?php if ($item['icon']): ?>
+                                        <i class="<?php echo htmlspecialchars($item['icon']); ?> me-1"></i>
+                                    <?php endif; ?>
+                                    <?php echo htmlspecialchars($item['title']); ?>
+                                </a>
+                                
+                                <!-- Submenu (child items) -->
+                                <?php if (!empty($item['children'])): ?>
+                                    <ul class="submenu">
+                                        <?php foreach ($item['children'] as $child): ?>
+                                            <li>
+                                                <a href="<?php echo htmlspecialchars($child['url']); ?>">
+                                                    <?php echo htmlspecialchars($child['title']); ?>
+                                                </a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <!-- Default menu if no menu set -->
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/posts">Blog</a></li>
+                        <li><a href="/products">Shop</a></li>
+                        <li><a href="/jobs">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    <?php endif; ?>
+                    
+                    <!-- Cart Icon (Always visible) -->
                     <li>
                         <a href="/cart" class="cart-icon">
                             <i class="ri-shopping-cart-line"></i>
