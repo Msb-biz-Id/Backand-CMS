@@ -22,6 +22,9 @@ Router::get('/post/{slug}', 'PostController@show');
 Router::get('/category/{slug}', 'PostController@category');
 Router::get('/tag/{slug}', 'PostController@tag');
 
+// Comments
+Router::post('/comments/submit', 'CommentController@submit', ['csrf']);
+
 // Products
 Router::get('/products', 'ProductController@index');
 Router::get('/product/{slug}', 'ProductController@show');
@@ -128,6 +131,31 @@ Router::post("/{$adminPath}/users", 'Admin\UserController@store', ['auth', 'admi
 Router::get("/{$adminPath}/users/{id}/edit", 'Admin\UserController@edit', ['auth', 'admin']);
 Router::post("/{$adminPath}/users/{id}", 'Admin\UserController@update', ['auth', 'admin', 'csrf']);
 Router::post("/{$adminPath}/users/{id}/delete", 'Admin\UserController@delete', ['auth', 'admin', 'csrf']);
+
+// Admin - Menus
+Router::get("/{$adminPath}/menus", 'Admin\MenuController@index', ['auth']);
+Router::get("/{$adminPath}/menus/create", 'Admin\MenuController@create', ['auth']);
+Router::post("/{$adminPath}/menus", 'Admin\MenuController@store', ['auth', 'csrf']);
+Router::get("/{$adminPath}/menus/{id}/builder", 'Admin\MenuController@builder', ['auth']);
+Router::get("/{$adminPath}/menus/{id}/edit", 'Admin\MenuController@edit', ['auth']);
+Router::post("/{$adminPath}/menus/{id}", 'Admin\MenuController@update', ['auth', 'csrf']);
+Router::post("/{$adminPath}/menus/{id}/delete", 'Admin\MenuController@delete', ['auth', 'csrf']);
+Router::post("/{$adminPath}/menus/{id}/add-item", 'Admin\MenuController@addItem', ['auth', 'csrf']);
+Router::post("/{$adminPath}/menus/{id}/reorder", 'Admin\MenuController@reorder', ['auth', 'csrf']);
+Router::post("/{$adminPath}/menus/item/{id}", 'Admin\MenuController@updateItem', ['auth', 'csrf']);
+Router::post("/{$adminPath}/menus/item/{id}/delete", 'Admin\MenuController@deleteItem', ['auth', 'csrf']);
+
+// Admin - Comments
+Router::get("/{$adminPath}/comments", 'Admin\CommentController@index', ['auth']);
+Router::post("/{$adminPath}/comments/{id}/approve", 'Admin\CommentController@approve', ['auth', 'csrf']);
+Router::post("/{$adminPath}/comments/{id}/reject", 'Admin\CommentController@reject', ['auth', 'csrf']);
+Router::post("/{$adminPath}/comments/{id}/spam", 'Admin\CommentController@spam', ['auth', 'csrf']);
+Router::post("/{$adminPath}/comments/{id}/delete", 'Admin\CommentController@delete', ['auth', 'csrf']);
+Router::post("/{$adminPath}/comments/bulk", 'Admin\CommentController@bulkAction', ['auth', 'csrf']);
+
+// Admin - Profile
+Router::get("/{$adminPath}/profile", 'Admin\UserController@profile', ['auth']);
+Router::post("/{$adminPath}/profile", 'Admin\UserController@updateProfile', ['auth', 'csrf']);
 
 // Admin - Settings
 Router::get("/{$adminPath}/settings", 'Admin\SettingController@index', ['auth', 'admin']);
