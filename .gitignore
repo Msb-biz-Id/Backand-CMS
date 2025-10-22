@@ -1,0 +1,65 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Storage directories
+storage/cache/*
+!storage/cache/.gitkeep
+storage/logs/*
+!storage/logs/.gitkeep
+storage/sessions/*
+!storage/sessions/.gitkeep
+storage/backups/*
+!storage/backups/.gitkeep
+
+# Upload directories
+public/uploads/*
+!public/uploads/.gitkeep
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.swp
+*.swo
+*~
+
+# Composer (if used later)
+/vendor/
+composer.phar
+composer.lock
+
+# Node modules (if used later)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Archives
+*.7z
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# Backup files
+*.sql
+*.bak
+*.backup
